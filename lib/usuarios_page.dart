@@ -16,30 +16,32 @@ class _UsuariosPageState extends State<UsuariosPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Usuários'), centerTitle: true,),
-      body: FutureBuilder<dynamic>(
-        future: _pegarUsuarios(),
-        builder: (context, snapshot){
-          if(snapshot.hasData){
-            return ListView.builder(
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index){
-                var usuario = snapshot.data![index];
-              return ListTile(
-                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => UsuarioPage(usuario: usuario)));},
-                leading: CircleAvatar(
-                  child: Text('${usuario['id']}'),
-                ),
-                title: Text('${usuario['name']}'),
-                subtitle: Text('${usuario['website']}'),
-              );
-            });
-          } else if(snapshot.hasError){
-            return Center(child: Text('${snapshot.error}'));
-          }
+      body: Center(
+        child: FutureBuilder<dynamic>(
+          future: _pegarUsuarios(),
+          builder: (context, snapshot){
+            if(snapshot.hasData){
+              return ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index){
+                  var usuario = snapshot.data![index];
+                  return ListTile(
+                    onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => UsuarioPage(usuario: usuario)));},
+                    leading: CircleAvatar(
+                      child: Text('${usuario['id']}'),
+                    ),
+                    title: Text('${usuario['name']}'),
+                    subtitle: Text('${usuario['website']}'),
+                  );
+              });
+            } else if(snapshot.hasError){
+              return Center(child: Text('${snapshot.error}'));
+            }
 
-          return const Center(child: CircularProgressIndicator());
-        }
-        ),
+            return const Center(child: CircularProgressIndicator());
+          }
+          ),
+      ),
     );
   }
 
