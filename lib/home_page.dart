@@ -1,5 +1,6 @@
 import 'package:consumo_api/busca_cep_page.dart';
 import 'package:consumo_api/usuarios_page.dart';
+import 'package:consumo_api/validar_cpf.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -35,7 +36,9 @@ class _HomePageState extends State<HomePage> {
               child: Text('Identificador de CEP', style: TextStyle(fontSize: 20),)
               ),
               TextButton(
-              onPressed: () {}, 
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: ((context) => ValidarCPF())));
+              }, 
               child: Text('Validador CPF', style: TextStyle(fontSize: 20),)
               ),
         ]
